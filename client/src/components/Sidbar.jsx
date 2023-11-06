@@ -1,5 +1,3 @@
-// components/Sidebar.js
-
 import {
     List,
     ListItemText,
