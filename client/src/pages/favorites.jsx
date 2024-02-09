@@ -6,12 +6,19 @@ import { Container, Grid, Typography } from '@mui/material'
 import MediaCard from '@/components/MediaCard'
 
 const Favorite = () => {
-    const fetcher = url => laravelAxios.get(url).then(res => res.data)
+    const fetcher = url =>
+        laravelAxios
+            .get(url)
+            .then(res => res.data)
+            .catch(err => {
+                throw err.response.data // ここでバックエンドからのエラーレスポンスを投げる
+            })
 
     const { data: favoriteItems, error } = useSWR('/api/favorites', fetcher)
-
+    console.log(favoriteItems)
     if (error) {
-        return <div>エラーが発生しました</div>
+        console.error('Error fetching data:', error) // エラーの詳細を表示
+        return 'エラーが発生しました'
     }
 
     // ローディング状態の判断

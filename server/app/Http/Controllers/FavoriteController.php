@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Favorite;
-use GuzzleHttp\Pool;
+// use GuzzleHttp\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
+// use Illuminate\Support\Facades\Http;
 
 class FavoriteController extends Controller
 {
@@ -18,23 +22,24 @@ class FavoriteController extends Controller
         $favorites = $user->favorites;
         $details = [];
 
-    // favoritesが空であるかを確認
-    if (!$favorites->count()) {
-        return response()->json(['message' => 'お気に入りは登録されていません'], 200);
-    }
-
-    //TMDBからもデータを取得する
-    foreach ($favorites as $favorite) {
-        $apiUrl = "https://api.themoviedb.org/3/" . $favorite->media_type . "/" . $favorite->media_id . "?api_key=" . $api_key;
-
-        // このオブジェクト(response)は、APIのレスポンスだけでなく、他のHTTP情報ステータスコード、ヘッダー、クッキーなども持っている
-        $response = Http::get($apiUrl);
-        if ($response->successful()) {
-            $details[] = array_merge($response->json(), ['media_type' => $favorite->media_type]);
+        // favoritesが空であるかを確認
+        if (!$favorites->count()) {
+            return response()->json(['message' => 'お気に入りは登録されていません'], 200);
         }
-    }
 
-    return response()->json($details);
+        //TMDBからもデータを取得する
+        foreach ($favorites as $favorite) {
+            $apiUrl = "https://api.themoviedb.org/3/" . $favorite->media_type . "/" . $favorite->media_id . "?api_key=" . $api_key;
+
+            // このオブジェクト(response)は、APIのレスポンスだけでなく、他のHTTP情報ステータスコード、ヘッダー、クッキーなども持っている
+            $response = Http::get($apiUrl);
+            if ($response->successful()) {
+                $details[] = array_merge($response->json(), ['media_type' => $favorite->media_type]);
+            }
+        }
+
+        return response()->json($details);
+
     }
 
     public function toggleFavorite(Request $request)

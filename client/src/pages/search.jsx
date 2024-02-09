@@ -6,7 +6,7 @@ import { Grid, Typography } from '@mui/material'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-//講義でfirterdResultsという変数名にしていますが、正しくはfilteredResultsです。つづりミスです
+
 const search = () => {
     const router = useRouter()
     const { query: searchQuery } = router.query
@@ -37,6 +37,7 @@ const search = () => {
         fetchMedia()
     }, [searchQuery])
 
+    //講義でfirterdResultsという変数名にしていますが、正しくはfilteredResultsです。つづりミスです
     const filteredResults = results.filter(result => {
         if (category === 'all') return true
         return result.media_type === category

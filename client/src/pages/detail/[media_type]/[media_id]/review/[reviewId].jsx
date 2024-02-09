@@ -124,7 +124,7 @@ const Review = () => {
                                 error={content.length > 200}
                                 helperText={
                                     content.length > 200
-                                        ? '5文字を超えています'
+                                        ? '200文字を超えています'
                                         : ''
                                 }
                                 fullWidth

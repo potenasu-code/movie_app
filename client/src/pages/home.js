@@ -15,12 +15,12 @@ const Home = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get('/api/getPopularMovies')
-
+                const response = await axios.get('api/getPopularMovies')
+                console.log(response.data.results)
                 setMovies(response.data.results)
-            } catch (error) {
-                //現在は詳細なエラー内容を出力していますが、リスクがある為、本番環境では詳細なエラー内容は出力しないようにします。
-                console.error(error)
+                console.log(movies)
+            } catch (err) {
+                console.log(err)
             }
         }
         fetchMovies()
@@ -75,7 +75,6 @@ const Home = () => {
                                     component="img"
                                     sx={{
                                         aspectRatio: '2/3',
-                                        // filter: 'blur(30px)',
                                     }}
                                     image={`${ImgBaseURL}/${movie.poster_path}`}
                                     alt={movie.title}

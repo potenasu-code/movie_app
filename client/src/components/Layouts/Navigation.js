@@ -119,8 +119,8 @@ const Navigation = ({ user }) => {
                             Home
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href="/favorite"
-                            active={router.pathname === '/favorite'}>
+                            href="/favorites"
+                            active={router.pathname === '/favorites'}>
                             お気に入り
                         </ResponsiveNavLink>
                     </div>

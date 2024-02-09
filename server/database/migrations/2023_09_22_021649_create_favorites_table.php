@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             //今回映画テーブルは作成せず映画情報はTMDBのAPIから取得する為外部キー設定ではなく整数値としてカラムを作る
-            $table->string('media_type'); // TMDBの映画IDを保存
+            $table->string('media_type'); // TMDBの映画タイプを保存
             $table->bigInteger('media_id'); // TMDBの映画IDを保存
             // $table->string('poster_path'); // ポスターのパスを保存※poster_pathが変更された場合写真が表示されないデメリットあり
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

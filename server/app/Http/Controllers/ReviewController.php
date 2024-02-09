@@ -63,7 +63,6 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-
         $review->load('user', 'comments.user');
         return response()->json($review);
     }
@@ -104,14 +103,6 @@ class ReviewController extends Controller
         return response()->json(["message" => "レビューを削除しました"],200);
     }
 
-// ルートモデルバインディング使用しない場合の記述例😥
-// public function destroy($id)
-// {
-    //
-//     $review = Review::find($id);
-//     return response()->json($review);
-// }
-
 //丁寧な削除処理😍
 // public function destroy(Review $review)
 // {
@@ -122,7 +113,7 @@ class ReviewController extends Controller
 
 //     try {
 //         $review->delete();
-//         return response()->json(["message" => "レビュー削除sしました"], 200);
+//         return response()->json(["message" => "レビュー削除しました"], 200);
 //     } catch (\Exception $e) {
 //         // 何らかの理由で削除に失敗した場合のエラーハンドリング
 //         return response()->json(["message" => "レビューの削除に失敗しました"], 500);
